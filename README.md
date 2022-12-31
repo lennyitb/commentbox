@@ -10,7 +10,7 @@ What you get is a pretty basic class with a to_s method and a small assortment o
 ## Get it
 
 ```bash
-  masterchief@corpco-workstation ~/importantproject $ gem install commentbox
+  masterchief@corpco-workstation:~/importantproject$ gem install commentbox
 ```
 
 ```ruby
