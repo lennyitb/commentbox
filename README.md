@@ -8,6 +8,8 @@
 ```
 
 ```ruby
+  #!/usr/bin/env ruby
+  # my_script.rb
   require 'commentbox'
 ```
 
