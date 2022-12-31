@@ -4,7 +4,7 @@
 ## Get it
 
 ```bash
-  gem install commentbox
+  masterchief@corpco-workstation ~/importantproject $ gem install commentbox
 ```
 
 ```ruby
