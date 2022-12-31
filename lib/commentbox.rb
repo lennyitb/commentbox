@@ -144,11 +144,14 @@ private
 				@alignment = [ align ] * (@text.size)
 		# set @alignment directly if an array is given
 			elsif align.is_a? Array
+				align.map! { |a| a.to_sym }
 		# if the array is too short, fill it with the last element
 				if align.size < @text.size then (@text.size - align.size).times { align.push align.last } end
 				@alignment = align
+			elsif align.is_a? String
+				@alignment = [ align.to_sym ] * (@text.size)
 			else
-				raise 'CommentBox#alignment= : expected Symbol or Array here'
+				raise 'CommentBox#alignment= : expected Symbol, Array, or String here'
 			end
 		end
 		# if the number of lines is even, insert a blank line between the first and second lines
@@ -158,7 +161,8 @@ private
 		if style == nil then @style = Styles[DefaultParams[:style]]
 		elsif style.is_a? Symbol then @style = Styles[style]
 		elsif style.is_a? Hash then @style = style
-		else raise 'CommentBox#style= : expected Symbol or Hash here' end
+		elsif style.is_a? String then @style = Styles[style.to_sym]
+		else raise 'CommentBox#style= : expected Symbol, Hash, or String here' end
 	end
 	def insert_line_if_even # also will delete a blank line if there is one
 		# stop this function from raising errors we don't really care about if the instance isn't fully constructed yet 

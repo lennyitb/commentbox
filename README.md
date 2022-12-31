@@ -24,7 +24,7 @@ What you get is a pretty basic class with a to_s method and a small assortment o
 ### Initialize with a string
 
 ```ruby
-  box = CommentBox.new "Hello, world!"
+  box = CommentBox.new "Lenny's box"
 ```
 
 ```C
@@ -46,6 +46,26 @@ What you get is a pretty basic class with a to_s method and a small assortment o
     ],
     alignment: [:center, :left, :right],
     style: :money, padding: 4, offset: 2, stretch: 15, spacelines: false
+```
+
+If you like to keep lengthy JSON files full of your settings, the only catch is the keys must be symbolized somehow. CommentBox is tolerant of String values, however:
+
+```ruby
+json_str = %q/{
+  "text": [
+    "Line 1",
+    "Line 2",
+    "Line 3"
+  ],
+  "alignment": ["center", "left", "right"],
+  "style": "money",
+  "padding": 4,
+  "offset": 2,
+  "stretch": 15,
+  "spacelines": false
+  }/
+  require 'json'
+  box = CommentBox.new JSON.parse(json_str, symbolize_names: true)
 ```
 
 ### Embed in ERB C/C++ templates
