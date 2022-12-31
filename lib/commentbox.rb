@@ -78,10 +78,13 @@ class CommentBox
 	attr_writer :padding, :spacelines, :alignment, :offset
 	# I don't know how to call param= methods from the inside so I just use a set_param in private
 	def text= (value); set_text value; self end; def alignment= (value); set_alignment value; self end
-	def style= (value); @style = Styles[value]; self end
+	def style= (value); set_style value; self end
 	# there is no @stretch, stretch is just added to @max_line_length
 	# but, if stretch= is called, then @max_line_length must be recalculated
-	def stretch= (value); @max_line_length = @text.map(&:length).max + value; self end
+	def stretch= (value)
+		@max_line_length = @text.map(&:length).max + value
+		if !@max_line_length.is_even? then @max_line_length += 1 end
+	self end
 
 	def initialize (params) # params: {text: String or Array, style: Symbol, padding: Integer, spacelines: Boolean, alignment: Symbol or Array}
 		# for now require an argument of some sort
@@ -91,7 +94,7 @@ class CommentBox
 		if params.is_a? String then params = {text: params} end 
 
 		# fill in a bunch of instance variables from params or default values
-		style_symbol = params[:style] || DefaultParams[:style]; @style = Styles[style_symbol]
+		# style_symbol = params[:style] || DefaultParams[:style]; @style = Styles[style_symbol]
 		@padding = params[:padding] || DefaultParams[:padding]
 		@offset = params[:offset] || DefaultParams[:offset]
 		# one of the options for this is false, so it's not gonna play nice with ||
@@ -100,7 +103,9 @@ class CommentBox
 		# call on some special methods to parse text and alignment
 		set_text params[:text]
 		set_alignment params[:alignment]	
+		set_style params[:style]
 		@max_line_length += (params[:stretch] || DefaultParams[:stretch]).to_i
+		if !@max_line_length.is_even? then @max_line_length += 1 end
 	end
 	def to_s
 		spaceLine = @spacelines ? [@style[:oddlines][0], ' ' * (@max_line_length + @padding * 2), @style[:oddlines][1], "\n"].join : ''
@@ -149,6 +154,12 @@ private
 		# if the number of lines is even, insert a blank line between the first and second lines
 		insert_line_if_even
 	end
+	def set_style (style)
+		if style == nil then @style = Styles[DefaultParams[:style]]
+		elsif style.is_a? Symbol then @style = Styles[style]
+		elsif style.is_a? Hash then @style = style
+		else raise 'CommentBox#style= : expected Symbol or Hash here' end
+	end
 	def insert_line_if_even # also will delete a blank line if there is one
 		# stop this function from raising errors we don't really care about if the instance isn't fully constructed yet 
 		if !(@text.is_a?(Array) && @alignment.is_a?(Array)) then return end
@@ -178,5 +189,3 @@ private
 		else @style[:oddlines][0] + ret + @style[:oddlines][1] + "\n" end
 	end
 end
-
-puts CommentBox.new "Lenny's box"
