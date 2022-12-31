@@ -1,7 +1,17 @@
 
 # Lenny's C/C++ comment box generator gem
 
-## Usage
+## Get it
+
+```bash
+  gem install commentbox
+```
+
+```ruby
+  require 'commentbox'
+```
+
+## Use it
 
 ### Initialize with a string
 
