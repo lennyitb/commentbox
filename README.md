@@ -27,7 +27,7 @@
       "Line 3",
     ],
     alignment: [:center, :left, :right],
-    Style: :money, padding: 4, offset: 2, stretch: 15, spacelines: false
+    style: :money, padding: 4, offset: 2, stretch: 15, spacelines: false
 ```
 
 ### Embed in ERB C/C++ templates
