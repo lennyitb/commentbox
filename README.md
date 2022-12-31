@@ -1,7 +1,9 @@
 
 # Lenny's C/C++ comment box generator gem
 
-## Initialize with a string
+## Usage
+
+### Initialize with a string
 
 ```ruby
   box = CommentBox.new "Hello, world!"
@@ -15,7 +17,7 @@
   /=*********************/
 ```
 
-### Initialize with a hash (all the parameters you can play with shown here)
+### Initialize with a hash (all the parameters you can play with are shown here)
 
 ```ruby
   box = CommentBox.new\
@@ -28,7 +30,7 @@
     Style: :money, padding: 4, offset: 2, stretch: 15, spacelines: false
 ```
 
-## Embed in ERB C/C++ templates
+### Embed in ERB C/C++ templates
 
 ```erb
   <%= box %>
@@ -52,7 +54,7 @@
   #/==============================================================*/
 ```
 
-## Availible Styles
+### Built-in styles
 
 ```C
   /***************=/
@@ -80,7 +82,7 @@
   X<><><><><><><><*/
 ```
 
-## your very own style
+### your very own style
 
 ```erb
   <%= # for the minimalist in all of us
