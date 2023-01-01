@@ -39,13 +39,20 @@ What you get is a pretty basic class with a to_s method and a small assortment o
 
 ```ruby
   box = CommentBox.new\
+    # text can be either an Array of Strings or a String with newlines
     text: [
       "Line 1",
       "Line 2",
       "Line 3",
     ],
-    alignment: [:center, :left, :right],
-    style: :money, padding: 4, offset: 2, stretch: 15, spacelines: false
+    # every other parameter is optional
+    # last alignment symbol will be copied for each remaining line if not enough are provided
+    alignment: [:center, :left, :right], # Array of Symbols or Strings, or just one Symbol or String
+    style: :money,     # Symbol of a built-in style or Hash of custom style
+    padding: 4,        # number of spaces before and after the longest line
+    offset: 2,         # number of indent spaces
+    stretch: 15,       # makes the box wider without changing the padding
+    spacelines: false  # empty lines above and below text
 ```
 
 If you like to keep lengthy JSON files full of your settings, the only catch is the keys must be symbolized somehow. CommentBox is tolerant of String values, however:
