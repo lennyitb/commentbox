@@ -4,11 +4,11 @@
 ## What it is
 
 ```C
-                    /*><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>X
-                    $!                                                              $!
-                    !$                    Lenny's CommentBox gem                    !$
-                    $!                                                              $!
-                    X<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><*/
+            /*><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>X
+            $!                                                              $!
+            !$                    Lenny's CommentBox gem                    !$
+            $!                                                              $!
+            X<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><*/
 ```
 
 If you like to write CG templates for C/C++ in ruby, you might find this gem useful. Maybe it's a version increment script, or maybe it's an overly repetitive solution you haven't figured out a better approach for. It generates nice little formatted multiline comment boxes for you with just a couple of lines of code.
