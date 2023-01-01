@@ -149,7 +149,7 @@ Referencing the same CommentBox we defined above and constructing a new one:
 
 ### Your very own style
 
-A style is just a hash (as shown below). it has a key for each of the two 'off' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary. Study `commentbox.rb` for more examples.
+A style is just a hash (as shown below). it has a key for each of the two 'off' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines respectively, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary. Study `commentbox.rb` for more examples.
 
 ```erb
   <%= # for the minimalist in all of us
