@@ -13,7 +13,7 @@
 
 If you like to write CG templates for C/C++ in ruby, you might find this gem useful. Maybe it's a version increment script, or maybe it's an overly repetitive solution you haven't figured out a better approach for. It generates nice little formatted multiline comment boxes for you with just a couple of lines of code.
 
-What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel.
+What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
 
 ## Get it
 
