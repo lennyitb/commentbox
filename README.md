@@ -56,7 +56,7 @@ What you get is a pretty basic class with a to_s method and a small assortment o
     # every other parameter is optional
     # last alignment symbol will be copied for each remaining line if not enough are provided
     alignment: [:center, :left, :right], # Array of Symbols/Strings, or just one Symbol/String
-    style: :money,     # Symbol/String naming a built-in style or Hash of describing your custom style
+    style: :money,     # Symbol/String naming a built-in style or Hash describing your custom style
     padding: 4,        # number of spaces before and after the longest line
     offset: 2,         # number of indent spaces
     stretch: 15,       # makes the box wider without changing the padding
