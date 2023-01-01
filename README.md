@@ -75,7 +75,12 @@ Referencing the same CommentBox we defined above and constructing a new one:
 ```erb
   <%= box %>
 
+  #ifndef MY_HEADER_H
+  #define MY_HEADER_H
+
   <%= CommentBox.new text: "note commentbox will insert a line\nif neccesary to ensure there's an odd number of lines", style: :bars %>
+
+  #endif
 ```
 
 ```C
@@ -85,6 +90,9 @@ Referencing the same CommentBox we defined above and constructing a new one:
   $!                    Line 3    $!
   X<><><><><><><><><><><><><><><><*/
 
+  #ifndef MY_HEADER_H
+  #define MY_HEADER_H
+
   /*==============================================================/#
   ||                                                              ||
   ||    note commentbox will insert a line                        ||
@@ -92,6 +100,8 @@ Referencing the same CommentBox we defined above and constructing a new one:
   ||    if neccesary to ensure there's an odd number of lines     ||
   ||                                                              ||
   #/==============================================================*/
+
+  #endif
 ```
 
 ### Built-in styles
@@ -132,7 +142,7 @@ Referencing the same CommentBox we defined above and constructing a new one:
     oddlines: ['  ', '  '],
     evenlines: ['  ', '  '],
     oddcorners: ['*\\', '\\*']
-}%>
+  }%>
 ```
 
 ```C
