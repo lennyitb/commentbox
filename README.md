@@ -55,8 +55,8 @@ What you get is a pretty basic class with a to_s method and a small assortment o
     ],
     # every other parameter is optional
     # last alignment symbol will be copied for each remaining line if not enough are provided
-    alignment: [:center, :left, :right], # Array of Symbols or Strings, or just one Symbol or String
-    style: :money,     # Symbol/String naming a built-in style or Hash of custom style
+    alignment: [:center, :left, :right], # Array of Symbols/Strings, or just one Symbol/String
+    style: :money,     # Symbol/String naming a built-in style or Hash of describing your custom style
     padding: 4,        # number of spaces before and after the longest line
     offset: 2,         # number of indent spaces
     stretch: 15,       # makes the box wider without changing the padding
@@ -148,6 +148,8 @@ Referencing the same CommentBox we defined above and constructing a new one:
 ```
 
 ### Your very own style
+
+A style is just a hash (as shown below). it has a key for each of the two 'off' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary. Study `commentbox.rb` for more examples.
 
 ```erb
   <%= # for the minimalist in all of us
