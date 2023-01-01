@@ -3,6 +3,14 @@
 
 ## What it is
 
+```C
+/*><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>X
+$!                                                              $!
+!$                    Lenny's CommentBox gem                    !$
+$!                                                              $!
+X<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><*/
+```
+
 If you like to write CG templates for C/C++ in ruby, you might find this gem useful. Maybe it's a version increment script, or maybe it's an overly repetitive solution you haven't figured out a better approach for. It generates nice little formatted multiline comment boxes for you with just a couple of lines of code.
 
 What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel.
@@ -55,7 +63,7 @@ What you get is a pretty basic class with a to_s method and a small assortment o
     spacelines: false  # empty lines above and below text
 ```
 
-If you like to keep lengthy JSON files full of your settings, for now, the only catch is that keys must be symbolized somehow. CommentBox is tolerant of String values, however:
+If you like to keep lengthy JSON files full of your build settings, for now, the only catch is that keys must be symbolized somehow. CommentBox is tolerant of String values, however:
 
 ```ruby
 json_str = %q/{
