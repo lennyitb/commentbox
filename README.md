@@ -24,7 +24,7 @@ What you get is a pretty basic class with a to_s method and a small assortment o
 ### Initialize with a string
 
 ```ruby
-  box = CommentBox.new "Lenny's box"
+  puts CommentBox.new "Lenny's box"
 ```
 
 ```C
