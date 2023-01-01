@@ -63,7 +63,7 @@ What you get is a pretty basic class with a to_s method and a small assortment o
     spacelines: false  # empty lines above and below text
 ```
 
-If you like to keep lengthy JSON files full of your build settings, for now, the only catch is that keys must be symbolized somehow. CommentBox is tolerant of String values, however:
+If you like to keep lengthy JSON files full of your build settings, for now, the only catch is that keys must be symbolized somehow. CommentBox is mostly tolerant of String values, however:
 
 ```ruby
 json_str = %q/{
