@@ -70,6 +70,8 @@ json_str = %q/{
 
 ### Embed in ERB C/C++ templates
 
+Referencing the same CommentBox we defined above and constructing a new one:
+
 ```erb
   <%= box %>
 
@@ -129,16 +131,16 @@ json_str = %q/{
     hlines: '  ',
     oddlines: ['  ', '  '],
     evenlines: ['  ', '  '],
-    oddcorners: ['  ', '  ']
-  }%>
+    oddcorners: ['*\\', '\\*']
+}%>
 ```
 
 ```C
-  /*                        
+  /*                      *\
                             
         Hello, world!       
                             
-                          */
+  \*                      */
 ```
 
 So yeah this is a pretty simple one- thanks for checking it out.
