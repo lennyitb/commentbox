@@ -11,9 +11,7 @@
             X<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><*/
 ```
 
-If you like to write CG templates for C/C++ in ruby, you might find this gem useful. Maybe it's a version increment script, or maybe it's an overly repetitive solution you haven't figured out a better approach for. It generates nice little formatted multiline comment boxes for you with just a couple of lines of code.
-
-What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
+It generates nice little formatted multiline comment boxes for you with just a couple of lines of code. I wrote this for another project, but I got carried away with it to the point that I think it's useful as its very own utility. It's around about 200 lines of ruby. What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
 
 ## Get it
 
@@ -60,27 +58,33 @@ What you get is a pretty basic class with a to_s method and a small assortment o
     padding: 4,        # number of spaces before and after the longest line
     offset: 2,         # number of indent spaces
     stretch: 15,       # makes the box wider without changing the padding
+    min_width: 0,      # a lot like stretch but absolute. forces a minimum width for more consistent formatting across all your boxes
     spacelines: false  # empty lines above and below text
 ```
 
 If you like to keep lengthy JSON files full of your build settings, for now, the only catch is that keys must be symbolized somehow. CommentBox is mostly tolerant of String values, however:
 
 ```ruby
-json_str = %q/{
-  "text": [
-    "Line 1",
-    "Line 2",
-    "Line 3"
-  ],
-  "alignment": ["center", "left", "right"],
-  "style": "money",
-  "padding": 4,
-  "offset": 2,
-  "stretch": 15,
-  "spacelines": false
-  }/
+  json_str =\
+    %q/{
+      "text": [
+        "Line 1",
+        "Line 2",
+        "Line 3"
+      ],
+      "alignment": ["center", "left", "right"],
+      "style": "money",
+      "padding": 4,
+      "offset": 2,
+      "stretch": 15,
+      "spacelines": false
+    }/
   require 'json'
   box = CommentBox.new JSON.parse(json_str, symbolize_names: true)
+
+  # also consider:
+  box2 = CommentBox.new JSON.parse(json_str).transform_keys(&:to_sym)
+  box == box2 # true
 ```
 
 ### Embed in ERB C/C++ templates
@@ -93,7 +97,7 @@ Referencing the same CommentBox we defined above and constructing a new one:
   #ifndef MY_HEADER_H
   #define MY_HEADER_H
 
-  <%= CommentBox.new text: "note commentbox will insert a line\nif neccesary to ensure there's an odd number of lines", style: :bars %>
+  <%= CommentBox.new text: "note commentbox will insert a line\nif neccesary to ensure there's an odd number of lines", style: :parallax %>
 
   #endif
 ```
@@ -121,6 +125,14 @@ Referencing the same CommentBox we defined above and constructing a new one:
 
 ### Built-in styles
 
+```erb
+<% # print a box for each style in styles
+styles = ['stub', 'parallax', 'zigzag', 'money']
+styles.each do |s|
+%><%= CommentBox.new text: (":" + s), style: s %>
+<% end %>
+```
+
 ```C
   /***************=/
   \                \
@@ -128,11 +140,11 @@ Referencing the same CommentBox we defined above and constructing a new one:
   \                \
   /=***************/
 
-  /*==============/#
-  ||              ||
-  ||    :bars     ||
-  ||              ||
-  #/==============*/
+  /*==================/#
+  ||                  ||
+  ||    :parallax     ||
+  ||                  ||
+  #/==================*/
 
   /*=-=-=-=-=-=-=-=-=O
   \                  \
@@ -147,9 +159,36 @@ Referencing the same CommentBox we defined above and constructing a new one:
   X<><><><><><><><*/
 ```
 
+### Messing with the defaults
+
+You're probably gonna wind up with a favorite setting you wanna stick with. There's a handful of set-&-forget type class methods you can use for this.
+
+```ruby
+  # access a hash of all the default settings
+  params = CommentBox.default_params
+
+  # pass self.default_params= only a complete hash with every setting
+  params[:style] = :money
+  CommentBox.default_params = params
+
+  # use self.set_default_params to merge a hash with the current defaults
+  CommentBox.set_default_params padding: 2, spacelines: false, alignment: :right
+
+  # i never definded a default_params[]= method but somehow it works anyway:
+  CommentBox.default_params[:stretch] = 20
+
+  puts CommentBox.new "Lenny's box"
+```
+
+```C
+    /*><><><><><><><><><><><><><><><><><><>X
+    $!                       Lenny's box  $!
+    X<><><><><><><><><><><><><><><><><><><*/
+```
+
 ### Your very own style
 
-A style is just a hash (as shown below). it has a key for each of the two 'odd' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines respectively, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary. Study `commentbox.rb` for more examples.
+A style is just a hash (as shown below). it has a key for each of the two 'odd' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines respectively, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary.
 
 ```erb
   <%= # for the minimalist in all of us
@@ -169,5 +208,21 @@ A style is just a hash (as shown below). it has a key for each of the two 'odd' 
                             
   \*                      */
 ```
+
+Also of course you may add your own style to the catalog of built-in styles:
+
+```ruby
+  CommentBox.add_style minimal: {
+    hlines: '  ',
+    oddlines: ['  ', '  '],
+    evenlines: ['  ', '  '],
+    oddcorners: ['*\\', '\\*'],
+    default?: true # optional- works with or without a question mark
+  }
+  CommentBox.set_default_params style: :minimal # redundant, but possible nonetheless
+  puts CommentBox.new text: "Hello, world!" # produces the same output as above
+```
+
+Study the output of `puts CommentBox.styles.to_s` for more examples.
 
 So yeah this is a pretty simple one- thanks for checking it out.
