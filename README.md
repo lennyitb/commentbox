@@ -227,26 +227,42 @@ A style is just a hash (as shown below). it has a key for each of the two 'odd' 
   }%>
 ```
 
+Also of course you may add your own style(s) to the catalog of built-in styles:
+
+```ruby
+  CommentBox.add_style\
+    minimal: {
+      hlines: '  ',
+      oddlines: ['  ', '  '],
+      evenlines: ['  ', '  '],
+      oddcorners: ['*\\', '\\*'],
+      default?: true # optional syntactic sugar- works with or without a question mark
+    },
+    maximal: { # add as many styles at a time as you want
+      hlines: '##',
+      oddlines: ['##', '##'],
+      evenlines: ['##', '##'],
+      oddcorners: ['#\\', '\\#'],
+      default: true # totally vestigial: add_style gives up looking for a 'default' option after it finds one
+    }
+  CommentBox.set_default_params style: :minimal # redundant here, but possible nonetheless
+  puts CommentBox.new text: "Hello, world!" # produces the same output as above
+  puts "\n" << CommentBox.new(text: "Hello, world!", style: :maximal).to_s
+  # no implicit conversion from CommentBox to string (only puts and like a handful of other things can do that haha)
+```
+
 ```C
   /*                      *\
                             
         Hello, world!       
                             
   \*                      */
-```
 
-Also of course you may add your own style to the catalog of built-in styles:
-
-```ruby
-  CommentBox.add_style minimal: {
-    hlines: '  ',
-    oddlines: ['  ', '  '],
-    evenlines: ['  ', '  '],
-    oddcorners: ['*\\', '\\*'],
-    default?: true # optional syntactic sugar- works with or without a question mark
-  }
-  CommentBox.set_default_params style: :minimal # redundant here, but possible nonetheless
-  puts CommentBox.new text: "Hello, world!" # produces the same output as above
+  /*#######################\
+  ##                      ##
+  ##    Hello, world!     ##
+  ##                      ##
+  \#######################*/
 ```
 
 Study the output of `puts CommentBox.styles.to_s` for more examples.
