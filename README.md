@@ -11,7 +11,7 @@
             X<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><*/
 ```
 
-It generates nice little formatted multiline comment boxes for you with just a couple of lines of code. I wrote this for another project, but I got carried away with it to the point that I think it's useful as its very own utility. It's around about 200 lines of ruby. What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
+It generates nice little formatted multiline comment boxes for you with just a couple of lines of code. I wrote this for another project, but I got carried away with it to the point that I think it's useful as its very own utility. It's around about 200 lines of ruby. This readme should have 100% of the information you need to use this gem. What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
 
 ## Get it
 
@@ -20,7 +20,6 @@ It generates nice little formatted multiline comment boxes for you with just a c
 ```
 
 ```ruby
-  #!/usr/bin/env ruby
   # my_script.rb
   require 'commentbox'
 ```
@@ -44,6 +43,8 @@ It generates nice little formatted multiline comment boxes for you with just a c
 ### Initialize with a hash (all the parameters you can play with are shown here)
 
 ```ruby
+  # my_script.rb
+
   box = CommentBox.new\
     # text can be either an Array of Strings or a String with newlines
     text: [
@@ -65,6 +66,9 @@ It generates nice little formatted multiline comment boxes for you with just a c
 If you like to keep lengthy JSON files full of your build settings, for now, the only catch is that keys must be symbolized somehow. CommentBox is mostly tolerant of String values, however:
 
 ```ruby
+  #...
+  # my_script.rb
+
   json_str =\
     %q/{
       "text": [
@@ -80,11 +84,11 @@ If you like to keep lengthy JSON files full of your build settings, for now, the
       "spacelines": false
     }/
   require 'json'
-  box = CommentBox.new JSON.parse(json_str, symbolize_names: true)
+  box2 = CommentBox.new JSON.parse(json_str, symbolize_names: true)
 
   # also consider:
-  box2 = CommentBox.new JSON.parse(json_str).transform_keys(&:to_sym)
-  box == box2 # true
+  box3 = CommentBox.new JSON.parse(json_str).transform_keys(&:to_sym)
+  box == box2 && box2 == box3 # true
 ```
 
 ### Embed in ERB C/C++ templates
@@ -92,6 +96,7 @@ If you like to keep lengthy JSON files full of your build settings, for now, the
 Referencing the same CommentBox we defined above and constructing a new one:
 
 ```erb
+  % require_relative 'my_script'
   <%= box %>
 
   #ifndef MY_HEADER_H
@@ -126,8 +131,8 @@ Referencing the same CommentBox we defined above and constructing a new one:
 ### Built-in styles
 
 ```erb
-<% # print a box for each style
-CommentBox.styles.keys.each do |s| %>
+%# print a box for each style
+<% CommentBox.styles.keys.each do |s| %>
 <%= CommentBox.new text: (":" + s.to_s), style: s, alignment: :center, min_width: 14 %>
 <% end %>
 ```
@@ -163,7 +168,8 @@ CommentBox.styles.keys.each do |s| %>
 You're probably gonna wind up with a favorite setting you wanna stick with. There's a handful of set-&-forget type class methods you can use to add some consistency to your boxes.
 
 ```ruby
-  #helper_file.rb
+  #...
+  # helper_file.rb
 
   # access a hash of all the default settings
   params = CommentBox.default_params
@@ -185,8 +191,8 @@ You're probably gonna wind up with a favorite setting you wanna stick with. Ther
 ```
 
 ```erb
-  <% require_relative 'helper_file.rb'
-  # i defined a little alias method 'cb' 2 lines ago if you're lost here: %>
+  % require_relative 'helper_file'
+  %# i defined a little alias method 'cb' 2 lines ago if you're lost here:
   <%= cb "Lenny's box" %>
   <%= cb "another box" %>
 ```
