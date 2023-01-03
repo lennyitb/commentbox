@@ -126,10 +126,9 @@ Referencing the same CommentBox we defined above and constructing a new one:
 ### Built-in styles
 
 ```erb
-<% # print a box for each style in styles
-styles = ['stub', 'parallax', 'zigzag', 'money']
-styles.each do |s|
-%><%= CommentBox.new text: (":" + s), style: s %>
+<% # print a box for each style
+CommentBox.styles.keys.each do |s| %>
+<%= CommentBox.new text: (":" + s.to_s), style: s %>
 <% end %>
 ```
 
