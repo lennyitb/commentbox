@@ -88,7 +88,11 @@ If you like to keep lengthy JSON files full of your build settings, for now, the
 
   # also consider:
   box3 = CommentBox.new JSON.parse(json_str).transform_keys(&:to_sym)
-  box == box2 && box2 == box3 # true
+
+  # box, box2, and box3 are all identical
+  unless (box == box2 && box2 == box3)
+    gift_shop.shut_down; circus.cancel; zoo.secure_all_animals; exits.close
+  end # gift shop remains open
 ```
 
 ### Embed in ERB C/C++ templates
@@ -173,6 +177,8 @@ You're probably gonna wind up with a favorite setting you wanna stick with. Ther
 
   # access a hash of all the default settings
   params = CommentBox.default_params
+  # equivalent to:
+  params = CommentBoxStyles::DefaultParams
 
   # pass self.default_params= only a complete hash with every setting
   params[:style] = :money
@@ -237,9 +243,9 @@ Also of course you may add your own style to the catalog of built-in styles:
     oddlines: ['  ', '  '],
     evenlines: ['  ', '  '],
     oddcorners: ['*\\', '\\*'],
-    default?: true # optional- works with or without a question mark
+    default?: true # optional syntactic sugar- works with or without a question mark
   }
-  CommentBox.set_default_params style: :minimal # redundant, but possible nonetheless
+  CommentBox.set_default_params style: :minimal # redundant here, but possible nonetheless
   puts CommentBox.new text: "Hello, world!" # produces the same output as above
 ```
 
