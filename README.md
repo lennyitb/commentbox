@@ -167,7 +167,7 @@ Referencing the same CommentBox we defined above and constructing a new one:
   X<><><><><><><><><><><><*/
 ```
 
-### Messing with the defaults
+## Messing with the defaults
 
 You're probably gonna wind up with a favorite setting you wanna stick with. There's a handful of set-&-forget type class methods you can use to add some consistency to your boxes.
 
@@ -212,9 +212,9 @@ You're probably gonna wind up with a favorite setting you wanna stick with. Ther
     X<><><><><><><><><><><><><><><><><><><><><*/
 ```
 
-### Your very own style
+## Your very own style
 
-A style is just a hash (as shown below). it has a key for each of the two 'odd' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines respectively, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary.
+A style is just a Hash (as shown below). it has a key for each of the two 'odd' corners (the begin/end corners will always be /\* \*/), as well as the begin/end borders for odd and even lines respectively, and finally a string for the horizontal lines at the top and bottom of the box. All Strings are exactly two characters that are repeated as necessary.
 
 ```erb
   <%= # for the minimalist in all of us
@@ -227,7 +227,9 @@ A style is just a hash (as shown below). it has a key for each of the two 'odd' 
   }%>
 ```
 
-Also of course you may add your own style(s) to the catalog of built-in styles:
+### Add your style to the catalog
+
+Of course, you may add your own style(s) to the catalog of built-in styles, and optionally set it as default:
 
 ```ruby
   CommentBox.add_style\
