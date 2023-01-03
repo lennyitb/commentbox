@@ -128,41 +128,43 @@ Referencing the same CommentBox we defined above and constructing a new one:
 ```erb
 <% # print a box for each style
 CommentBox.styles.keys.each do |s| %>
-<%= CommentBox.new text: (":" + s.to_s), style: s %>
+<%= CommentBox.new text: (":" + s.to_s), style: s, alignment: :center, min_width: 14 %>
 <% end %>
 ```
 
 ```C
-  /***************=/
-  \                \
-  /     :stub      /
-  \                \
-  /=***************/
+  /***********************=/
+  \                        \
+  /         :stub          /
+  \                        \
+  /=***********************/
 
-  /*==================/#
-  ||                  ||
-  ||    :parallax     ||
-  ||                  ||
-  #/==================*/
+  /*======================/#
+  ||                      ||
+  ||      :parallax       ||
+  ||                      ||
+  #/======================*/
 
-  /*=-=-=-=-=-=-=-=-=O
-  \                  \
-  /     :zigzag      /
-  \                  \
-  O-=-=-=-=-=-=-=-=-*/
+  /*=-=-=-=-=-=-=-=-=-=-=-=O
+  \                        \
+  /        :zigzag         /
+  \                        \
+  O-=-=-=-=-=-=-=-=-=-=-=-*/
 
-  /*><><><><><><><>X
-  $!              $!
-  !$    :money    !$
-  $!              $!
-  X<><><><><><><><*/
+  /*><><><><><><><><><><><>X
+  $!                      $!
+  !$        :money        !$
+  $!                      $!
+  X<><><><><><><><><><><><*/
 ```
 
 ### Messing with the defaults
 
-You're probably gonna wind up with a favorite setting you wanna stick with. There's a handful of set-&-forget type class methods you can use for this.
+You're probably gonna wind up with a favorite setting you wanna stick with. There's a handful of set-&-forget type class methods you can use to add some consistency to your boxes.
 
 ```ruby
+  #helper_file.rb
+
   # access a hash of all the default settings
   params = CommentBox.default_params
 
@@ -171,18 +173,31 @@ You're probably gonna wind up with a favorite setting you wanna stick with. Ther
   CommentBox.default_params = params
 
   # use self.set_default_params to merge a hash with the current defaults
-  CommentBox.set_default_params padding: 2, spacelines: false, alignment: :right
+  # String keys are acceptable
+  CommentBox.set_default_params "padding" => 2, spacelines: false, alignment: :right
 
   # i never definded a default_params[]= method but somehow it works anyway:
   CommentBox.default_params[:stretch] = 20
+  # don't try and call this with a String key though
+  
+  # if you have a lot of CommentBoxes, consider something like this:
+  def cb(arg); CommentBox.new(arg).to_s; end
+```
 
-  puts CommentBox.new "Lenny's box"
+```erb
+  <% require_relative 'helper_file.rb'
+  # i defined a little alias method 'cb' 2 lines ago if you're lost here: %>
+  <%= cb "Lenny's box" %>
+  <%= cb "another box" %>
 ```
 
 ```C
-    /*><><><><><><><><><><><><><><><><><><>X
-    $!                       Lenny's box  $!
-    X<><><><><><><><><><><><><><><><><><><*/
+    /*><><><><><><><><><><><><><><><><><><><><>X
+    $!                         Lenny's box    $!
+    X<><><><><><><><><><><><><><><><><><><><><*/
+    /*><><><><><><><><><><><><><><><><><><><><>X
+    $!                         another box    $!
+    X<><><><><><><><><><><><><><><><><><><><><*/
 ```
 
 ### Your very own style

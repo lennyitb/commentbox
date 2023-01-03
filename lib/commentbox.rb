@@ -78,9 +78,11 @@ class CommentBox
 	@@styles = CommentBoxStyles::Styles
 
 	# class methods for messing with default values
+	# make sure everything is symbolized that needs to be
 	def self.default_params; @@default_params end
-	def self.default_params=(value); @@default_params = value end
-	def self.set_default_params (value = {}); value.each { |key, val| @@default_params[key] = val } end
+	def self.default_params=(value); @@default_params = value.transform_keys(&:to_sym) end
+	# def self.default_params[]= (key, value); @@default_params[key.to_sym] = value end
+	def self.set_default_params (value = {}); value.each { |key, val| @@default_params[key.to_sym] = val } end
 	def self.styles; @@styles end
 	def self.add_style(value)
 		value.each do |key, val|
@@ -90,7 +92,8 @@ class CommentBox
 			end
 		end
 		# I could attempt to remove a :default? key here but it doesn't matter
-		@@styles.merge! value
+		# this is a terse one but trust me
+		@@styles.merge! value.transform_keys(&:to_sym).transform_values { |v| v.transform_keys(&:to_sym) }
 	end
 	
 	# instance setter methods
