@@ -248,6 +248,9 @@ Of course, you may add your own style(s) to the catalog of built-in styles, and 
       default: true # totally vestigial: add_style gives up looking for a 'default' option after it finds one
     }
   CommentBox.set_default_params style: :minimal # redundant here, but possible nonetheless
+```
+
+```ruby
   puts CommentBox.new text: "Hello, world!" # produces the same output as above
   puts "\n" << CommentBox.new(text: "Hello, world!", style: :maximal).to_s
   # no implicit conversion from CommentBox to string (only puts and like a handful of other things can do that haha)
