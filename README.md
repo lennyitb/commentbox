@@ -53,6 +53,7 @@ It generates nice little formatted multiline comment boxes for you with just a c
       "Line 3",
     ],
     # every other parameter is optional
+    # alignment is up to one element for each line
     # last alignment symbol will be copied for each remaining line if not enough are provided
     alignment: [:center, :left, :right], # Array of Symbols/Strings, or just one Symbol/String
     style: :money,     # Symbol/String naming a built-in style or Hash describing your custom style
@@ -147,6 +148,12 @@ Referencing the same CommentBox we defined above and constructing a new one:
   /         :stub          /
   \                        \
   /=***********************/
+  
+  /***********************+/
+  \*                      *\
+  /+       :window        +/
+  \*                      *\
+  /+***********************/
 
   /*======================/#
   ||                      ||
@@ -229,7 +236,7 @@ A style is just a Hash (as shown below). it has a key for each of the two 'odd' 
 
 ### Add your style to the catalog
 
-Of course, you may add your own style(s) to the catalog of built-in styles, and optionally set it as default:
+Of course, you may add your own style(s) to the catalog of built-in styles and optionally set it as default. I suppose you could even redefine the built-in styles if you really wanted:
 
 ```ruby
   CommentBox.add_style\
@@ -245,13 +252,15 @@ Of course, you may add your own style(s) to the catalog of built-in styles, and 
       oddlines: ['##', '##'],
       evenlines: ['##', '##'],
       oddcorners: ['#\\', '\\#'],
-      default: true # totally vestigial: add_style gives up looking for a 'default' option after it finds one
+      default: true # totally vestigial:
+      # add_style gives up looking for a 'default' option after it finds one
     }
   CommentBox.set_default_params style: :minimal # redundant here, but possible nonetheless
 
   puts CommentBox.new text: "Hello, world!" # produces the same output as above
   puts "\n" << CommentBox.new(text: "Hello, world!", style: :maximal).to_s
-  # no implicit conversion from CommentBox to string (only puts and like a handful of other things can do that haha)
+  # no implicit conversion from CommentBox to string
+  # (only puts and like a handful of other things can do that haha)
 ```
 
 ```C

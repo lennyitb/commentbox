@@ -16,6 +16,12 @@ module CommentBoxStyles
 			evenlines: ['/ ', ' /'],
 			oddcorners: ['=/','/=']
 		},
+		window: {
+			hlines: '**',
+			oddlines: ['\\*', '*\\'],
+			evenlines: ['/+', '+/'],
+			oddcorners: ['+/','/+']
+		},
 		parallax: {
 			hlines: '==',
 			oddlines: ['||', '||'],
@@ -143,8 +149,8 @@ class CommentBox
 			(0..@text.size - 1).map { |line| fmt_text_line line }, # this is a nested array and must be flattened
 			spaceLine,
 			t_line(:end)
-		# flatten, add offset to each line if it's not empty, join them together, and remove trailing newline
-		].flatten.map { |line| line == '' ? '' : (' ' * @offset) << line}.join.chomp 
+		# flatten, map offset in front of each line if it's not empty, join them together, and remove trailing newline
+		].flatten.map { |line| line == '' ? '' : (' ' * @offset) << line }.join.chomp 
 	end
 
 private
@@ -200,7 +206,7 @@ private
 			else @text.insert(1,''); @alignment.insert(1,:left) end
 		end
 	end
-	def t_line (beginOrEnd)
+	def t_line (beginOrEnd) #t[erminating]_line: top or bottom (begin or end) of the box
 		if beginOrEnd == :begin
 			bchar = '/*'; echar = @style[:oddcorners][0]
 		else
