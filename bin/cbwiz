@@ -53,6 +53,7 @@ ARGV.each do |arg|
 		# although it remains possible to explicitly specify true
 		options[:spacelines] = false
 	else
+		# every argv that gets here is not a switch
 		if options[mode].nil?
 			options[mode] = arg
 		else

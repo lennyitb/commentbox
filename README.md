@@ -11,7 +11,7 @@
             X<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><*/
 ```
 
-It generates nice little formatted multiline comment boxes for you with just a couple of lines of code. I wrote this for another project, but I got carried away with it to the point that I think it's useful as its very own utility. It's around about 200 lines of ruby. This readme should have 100% of the information you need to use this gem. What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
+It generates nice little formatted multiline comment boxes for you with just a couple of lines of code. It can be helpful either in CG scripts or directly in your C/C++ editing workflow with the executable tool `cbwiz`. I wrote this for another project, but I got carried away with it to the point that I think it's useful as its very own utility. It's around about 200 lines of ruby. This readme should have 100% of the information you need to use this gem. What you get is a pretty basic class with a to_s method and a small assortment of options to customize your CommentBox look and feel all available under the fabulous MIT license.
 
 ## Get it
 
@@ -178,7 +178,7 @@ Note that CommentBoxes must have an odd number of lines for now.
 
 ## cbwiz: new in CommentBox 0.3.0
 
-Now present in the gem is the command line tool `cbwiz`. It just makes one CommentBox according to the command line args, outputs and exits. This is handy for some editing workflows, like in vim, with the command `:r! cbwiz "Lenny's box"` to simply copy the generated box directly under your cursor.
+Now present in the gem is the command line tool `cbwiz` present in the gem as an executable. It should work as described right out of the box(badumtiss). It just makes one CommentBox according to command line arguments, outputs and exits. This is handy for some editing workflows, like in vim, with the command `:r! cbwiz "Lenny's box"` to simply copy the generated box directly under your cursor.
 
 It has most of the same options present in ruby, just in bash flag form:
   

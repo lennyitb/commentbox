@@ -7,7 +7,7 @@ module CommentBoxStyles
 		offset:      2,
 		min_width:   0,
 		spacelines:  true,
-		alignment:  :left
+		alignment:   :left
 	}
 	Styles = {
 		stub: {
