@@ -133,6 +133,8 @@ Referencing the same CommentBox we defined above and constructing a new one:
   #endif
 ```
 
+Note that CommentBoxes must have an odd number of lines for now.
+
 ### Built-in styles
 
 ```erb
@@ -172,6 +174,25 @@ Referencing the same CommentBox we defined above and constructing a new one:
   !$        :money        !$
   $!                      $!
   X<><><><><><><><><><><><*/
+```
+
+## cbwiz: new in CommentBox 0.3.0
+
+Now present in the gem is the command line tool `cbwiz`. It just makes one CommentBox according to the command line args, outputs and exits. This is handy for some editing workflows, like in vim, with the command `:r! cbwiz "Lenny's box"` to simply copy the generated box directly under your cursor.
+
+It has most of the same options present in ruby, just in bash flag form:
+  
+```bash
+  $ cbwiz -h
+  Usage: cbwiz [options] [text]
+      -a, --alignment ALIGNMENT          Alignment of text. Can be one of: center, left, right
+      -s, --style STYLE                  Style of box. Can be one of: stub, window, parallax, zigzag, money
+      -p, --padding PADDING              Number of spaces before and after the longest line
+      -o, --offset OFFSET                Number of indent spaces
+      -t, --stretch STRETCH              Makes the box wider without changing the padding
+      -m, --min-width MIN_WIDTH          A lot like stretch but absolute. Forces a minimum width for more consistent formatting across all your boxes
+      -l, --spacelines                   Empty lines above and below text
+      -h, --help                         Prints this help
 ```
 
 ## Messing with the defaults

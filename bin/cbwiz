@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+
+require 'commentbox'
+
+$HELP_MSG = %q(Usage: cbwiz [options] [text]
+Options:
+	-t, --text [text]         Text to be commented. Optional flag for first argument
+	-a, --align [l1, l2...]   Alignment of text: left, center, right
+	-s, --style [style]       Style of comment box: stub, window, parallax, zigzag, or money
+	-p, --padding [padding]   Padding of comment box
+	-o, --offset [offset]     Offset of comment box
+	-w, --stretch [stretch]   Stretch of comment box
+	-sl, --spacelines         Remove space lines (default true)
+	-h, --help                Display this help message
+)
+
+def help_and_exit
+	puts $HELP_MSG
+	exit
+end
+
+if ARGV.empty?
+	help_and_exit
+end
+# if the :text parameter is first, the -t flag is optional
+mode = :text
+options = {}
+# for each argument:
+#   if it's a switch, set the `mode` symbol
+#   if it's a value, set/append to the coresponding `mode` key in `options`
+ARGV.each do |arg|
+	case arg
+	when '-h', '--help', 'help', '-?', '--?'
+		help_and_exit
+	when '-t', '--text'
+		mode = :text
+	when '-a', '--align'
+		mode = :align
+	when '-s', '--style'
+		mode = :style
+	when '-p', '--padding'
+		mode = :padding
+	when '-o', '--offset'
+		mode = :offset
+	when '-w', '--stretch'
+		mode = :stretch
+	when '-sl', '--spacelines'
+		mode = :spacelines
+		# default is true so if it's mentioned, we implicitly assume false
+		# although it remains possible to explicitly specify true
+		options[:spacelines] = false
+	else
+		if options[mode].nil?
+			options[mode] = arg
+		else
+			# hacky line to make sure anything with multiple arguments comes out as a flat array
+			options[mode] = ([ options[mode] ] << arg).flatten
+		end
+	end
+end
+
+
+puts options.to_s
+
+puts CommentBox.new options

@@ -124,8 +124,8 @@ class CommentBox
 		if params.is_a? String then params = {text: params} end 
 
 		# fill in a bunch of instance variables from params or default values
-		@padding = params[:padding] || @@default_params[:padding]
-		@offset = params[:offset] || @@default_params[:offset]
+		@padding = params[:padding].to_i || @@default_params[:padding]
+		@offset = params[:offset].to_i || @@default_params[:offset]
 		# one of the options for this is false, so it's not gonna play nice with ||
 		@spacelines = (params[:spacelines] != nil) ? params[:spacelines] : @@default_params[:spacelines] 
 		@stretch = (params[:stretch] || @@default_params[:stretch]).to_i
