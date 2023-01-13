@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name                   = 'commentbox'
-	s.version                = '0.3.2'
+	s.version                = '0.3.3'
 	s.summary                = "Lenny C/C++ template CommentBox class"
 	s.description            = 'A little gem for generating pretty multiline comment boxes in C/C++ templates'
 	s.authors                = ['Leonard H. Phelan IV']
