@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+# cbwiz - an executable tool for the commentbox ruby gem by Lenny
+# github.com/lennyitb/commentbox
+
 require 'commentbox'
 
 $HELP_MSG = %q(Usage: cbwiz [options] [text]

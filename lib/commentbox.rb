@@ -1,4 +1,7 @@
 
+# commentbox: a ruby gem for generating C/C++ formatted comment boxes
+# github.com/lennyitb/commentbox
+
 module CommentBoxStyles
 	DefaultParams = {
 		style:       :stub,
