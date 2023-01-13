@@ -10,6 +10,7 @@ Options:
 	-p, --padding [padding]   Padding of comment box
 	-o, --offset [offset]     Offset of comment box
 	-w, --stretch [stretch]   Stretch of comment box
+	-m, --minwidth [minwidth] Minimum width of comment box (like a more absolute stretch)
 	-sl, --spacelines         Remove space lines (default true)
 	-h, --help                Display this help message
 )
@@ -34,8 +35,8 @@ ARGV.each do |arg|
 		help_and_exit
 	when '-t', '--text'
 		mode = :text
-	when '-a', '--align'
-		mode = :align
+	when '-a', '--align', '--alignment'
+		mode = :alignment
 	when '-s', '--style'
 		mode = :style
 	when '-p', '--padding'
@@ -44,6 +45,8 @@ ARGV.each do |arg|
 		mode = :offset
 	when '-w', '--stretch'
 		mode = :stretch
+	when '-m', '--minwidth', '--min_width', '--min-width'
+		mode = :min_width
 	when '-sl', '--spacelines'
 		mode = :spacelines
 		# default is true so if it's mentioned, we implicitly assume false
@@ -58,8 +61,7 @@ ARGV.each do |arg|
 		end
 	end
 end
-
-
-puts options.to_s
+# finally, unescape newlines in text
+options[:text] = options[:text].gsub('\n', "\n")
 
 puts CommentBox.new options

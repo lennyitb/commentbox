@@ -185,14 +185,16 @@ It has most of the same options present in ruby, just in bash flag form:
 ```bash
   $ cbwiz -h
   Usage: cbwiz [options] [text]
-      -a, --alignment ALIGNMENT          Alignment of text. Can be one of: center, left, right
-      -s, --style STYLE                  Style of box. Can be one of: stub, window, parallax, zigzag, money
-      -p, --padding PADDING              Number of spaces before and after the longest line
-      -o, --offset OFFSET                Number of indent spaces
-      -t, --stretch STRETCH              Makes the box wider without changing the padding
-      -m, --min-width MIN_WIDTH          A lot like stretch but absolute. Forces a minimum width for more consistent formatting across all your boxes
-      -l, --spacelines                   Empty lines above and below text
-      -h, --help                         Prints this help
+  Options:
+    -t, --text [text]         Text to be commented. If text is provided first, this flag is optional
+    -a, --align [l1, l2...]   Alignment of text: left, center, right
+    -s, --style [style]       Style of comment box: stub, window, parallax, zigzag, or money
+    -p, --padding [padding]   Padding of comment box
+    -o, --offset [offset]     Offset of comment box
+    -w, --stretch [stretch]   Stretch of comment box
+    -m, --minwidth [minwidth] Minimum width of comment box (like a more absolute stretch)
+    -sl, --spacelines         Remove space lines (default true)
+    -h, --help                Display this help message
 ```
 
 ## Messing with the defaults
