@@ -107,7 +107,7 @@ Referencing the same CommentBox we defined above and constructing a new one:
   #ifndef MY_HEADER_H
   #define MY_HEADER_H
 
-  <%= CommentBox.new text: "note commentbox will insert a line\nif neccesary to ensure there's an odd number of lines", style: :parallax %>
+  <%= CommentBox.new text: "note commentbox will insert a line\nif necessary to ensure there's an odd number of lines", style: :parallax %>
 
   #endif
 ```
@@ -126,7 +126,7 @@ Referencing the same CommentBox we defined above and constructing a new one:
   ||                                                              ||
   ||    note commentbox will insert a line                        ||
   ||                                                              ||
-  ||    if neccesary to ensure there's an odd number of lines     ||
+  ||    if necessary to ensure there's an odd number of lines     ||
   ||                                                              ||
   #/==============================================================*/
 
@@ -218,7 +218,7 @@ You're probably gonna wind up with a favorite setting you wanna stick with. Ther
   # String keys are acceptable
   CommentBox.set_default_params "padding" => 2, spacelines: false, alignment: :right
 
-  # i never definded a default_params[]= method but somehow it works anyway:
+  # i never defined a default_params[]= method but somehow it works anyway:
   CommentBox.default_params[:stretch] = 20
   # don't try and call this with a String key though
   
