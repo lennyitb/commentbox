@@ -22,10 +22,11 @@ def help_and_exit
 	puts $HELP_MSG
 	exit
 end
-
 if ARGV.empty?
-	help_and_exit
+	puts "/* cbwiz - no arguments given. for help, use: cbwiz -h */"
+	exit
 end
+
 # if the :text parameter is first, the -t flag is optional
 mode = :text
 options = {}
@@ -60,11 +61,15 @@ ARGV.each do |arg|
 		if options[mode].nil?
 			options[mode] = arg
 		else
-			# hacky line to make sure anything with multiple arguments comes out as a flat array
+			# hacky line to make sure any switch with multiple arguments comes out as a flat array like so:
+			# -a left center right
+			#   >> { alignment: ['left', 'center', 'right'] }
 			options[mode] = ([ options[mode] ] << arg).flatten
 		end
 	end
 end
+# make sure the :text key is a string
+if options[:text].is_a? Array then options[:text] = options[:text].join(' ') end
 # finally, unescape newlines in text
 options[:text] = options[:text].gsub('\n', "\n")
 
