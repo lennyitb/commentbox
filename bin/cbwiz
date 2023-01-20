@@ -1,14 +1,15 @@
 #!/usr/bin/env ruby
 
 # cbwiz - an executable tool for the commentbox ruby gem by Lenny
+# it's read: Comment Box WhIZzer
 # github.com/lennyitb/commentbox
 
 require 'commentbox'
 
-$HELP_MSG = %q(Usage: cbwiz [options] [text]
+$HELP_MSG = %q(Usage: cbwiz [-t] text [options]
 Options:
 	-t, --text [text]         Text to be commented. Optional flag for first argument
-	-a, --align [l1, l2...]   Alignment of text: left, center, right
+	-a, --align [l1 l2...]   Alignment of text: left, center, right
 	-s, --style [style]       Style of comment box: stub, window, parallax, zigzag, or money
 	-p, --padding [padding]   Padding of comment box
 	-o, --offset [offset]     Offset of comment box
@@ -31,8 +32,13 @@ end
 mode = :text
 options = {}
 # for each argument:
-#   if it's a switch, set the `mode` symbol
-#   if it's a value, set/append to the coresponding `mode` key in `options`
+#  - if it's a switch, set the `mode` symbol
+#  - if it's a value, set/append to the coresponding `mode` key in `options`
+
+# usually this type of code wouldn't be the best practice, but not only does it work well here--
+# it's also a situation where the order of the arguments is an important piece, that we can't
+# really get away from by writitng unnecicarily declarative code. With each iterative pass,
+# we're either updating the mode, or using the value of mode we set before.
 ARGV.each do |arg|
 	case arg
 	when '-h', '--help', 'help', '-?', '--?'
